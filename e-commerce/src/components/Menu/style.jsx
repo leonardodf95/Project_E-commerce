@@ -4,11 +4,12 @@ export const MenuBar = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    background-color: #FADCD9;
+    background-color: #FFF;
+    box-shadow: 5px 5px 5px #000000;
 `
 
 export const LogoImage = styled.img`
-    height: 10vh;
+    height: 40px;
     width: 100px;
 `
 
