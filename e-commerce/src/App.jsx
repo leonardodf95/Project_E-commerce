@@ -2,6 +2,7 @@ import Menu from './components/Menu'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css'
 import routes from './defaults/routes';
+import ToogleCarrinho from './components/Cart';
 
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
   return (
     <BrowserRouter>
       <Menu/>
+      <ToogleCarrinho/>
       <Routes>
         {
           routes.map(
