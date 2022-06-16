@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const MenuBar = styled.div`
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
     background-color: #FFF;
     box-shadow: 5px 5px 5px #000000;
 `
@@ -15,7 +15,7 @@ export const LogoImage = styled.img`
 
 export const MenuItems = styled.div`
     display: flex;
-    margin-right: 50%;
+    
 `
 
 export const Items = styled.button`
@@ -34,6 +34,23 @@ export const Items = styled.button`
     transform: scale(1);
     &:hover {
         color: #310094;
+        transform: scale(1.1);
+    }
+`
+
+export const Entrar = styled.button`
+    display: flex;
+    align-items: center;
+    margin-right: 50px;
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 5px;
+    background-color: #31009479;
+    transition: .15s transform ease;
+    transform: scale(1);
+    &:hover {
+        background-color: #310094ba;
         transform: scale(1.1);
     }
 `

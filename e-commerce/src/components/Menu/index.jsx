@@ -1,6 +1,8 @@
-import { MenuBar, LogoImage, MenuItems, Items } from "./style";
 import { Link } from "react-router-dom";
+import { CgProfile } from "react-icons/cg";
+import { MenuBar, LogoImage, MenuItems, Items, Entrar } from "./style";
 import routes from "../../defaults/routes";
+
 const Menu = () => {
   return (
     <MenuBar>
@@ -15,6 +17,7 @@ const Menu = () => {
           </Items>
         ))}
       </MenuItems>
+      <Entrar><CgProfile/>Entrar</Entrar>
     </MenuBar>
   );
 };
