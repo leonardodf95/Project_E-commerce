@@ -8,6 +8,7 @@ const ROUTES_CADASTRO = '/cadastro'
 const ROUTES_CARRINHO = '/carrinho'
 const ROUTES_SOBRE = '/sobre'
 
+
 const routes = [
     {
         path: ROUTES_INICIO,

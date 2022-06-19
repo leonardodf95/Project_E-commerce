@@ -5,15 +5,14 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    width: 360px;
+    width: 320px;
     margin: auto;
     margin-top: 50px;
     padding: 20px;
     background-color: #fff;
+
+    
 `
-
-
-
 
 export const TitleContainer = styled.div`
     display: flex;
@@ -24,10 +23,4 @@ export const TitleContainer = styled.div`
 
 export const Title = styled.h1`
     margin: 0;
-`
-
-export const SubTitle = styled.span`
-    font-weight: 300;
-    font-size: 12px;
-    margin-bottom: 5px;
 `

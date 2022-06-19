@@ -44,13 +44,19 @@ export const Entrar = styled.button`
     margin-right: 50px;
     border: none;
     color: #fff;
+    
     font-weight: 600;
     border-radius: 5px;
-    background-color: #31009479;
+    background-color: #cacaca96;
     transition: .15s transform ease;
     transform: scale(1);
     &:hover {
-        background-color: #310094ba;
+        background-color: #cacaca;
         transform: scale(1.1);
+    }
+
+    & a{
+        display: flex;
+        align-items: center;
     }
 `

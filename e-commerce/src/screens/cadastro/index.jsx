@@ -1,13 +1,20 @@
 import { Form, Input, Button } from "antd"
+import { useEffect } from "react";
+import { useContext } from "react";
+import UserContext from "../../context/UserContext";
 import { Container, SubTitle, Title, TitleContainer } from "./style";
 
 const Cadastro = () => {
     const [form] = Form.useForm()
-    const dateFormat = 'DD/MM/YYYY'
+    const {registrationUser , setRegistration} = useContext(UserContext)
 
-    const onFinish = (e) => (
+    const onFinish = (e) => {
         console.log(e)
-    )
+        setRegistration(e)
+        
+    }
+
+    useEffect(()=>{console.log('useEffect: ',registrationUser)},[registrationUser])
     return (
         <Container>
             <TitleContainer>

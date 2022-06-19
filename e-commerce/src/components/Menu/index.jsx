@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { CgProfile } from "react-icons/cg";
+import { CgProfile, CgSmileNone } from "react-icons/cg";
 import { MenuBar, LogoImage, MenuItems, Items, Entrar } from "./style";
 import routes from "../../defaults/routes";
 
@@ -17,7 +17,7 @@ const Menu = () => {
           </Items>
         ))}
       </MenuItems>
-      <Entrar><CgProfile/>Entrar</Entrar>
+      <Entrar><Link to='/login'><CgProfile/>Entrar</Link></Entrar>
     </MenuBar>
   );
 };
