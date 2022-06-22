@@ -34,7 +34,7 @@ const CardCourse = ({ product }) => {
           ]}
           onOk={handleOk}
         >
-          <p>Preço: R${product.price}</p>
+          <p>Preço: R${(product.price).toFixed(2)}</p>
           <p>Duração: {product.duration} horas</p>
           <p>Professor: {product.teacher_name}</p>
           <p>Descrição: {product.description}</p>
