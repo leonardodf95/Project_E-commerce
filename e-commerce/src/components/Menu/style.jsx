@@ -38,13 +38,12 @@ export const Items = styled.button`
     }
 `
 
-export const Entrar = styled.button`
+export const Button = styled.button`
     display: flex;
     align-items: center;
-    margin-right: 50px;
     border: none;
     color: #fff;
-    
+    margin-right: 5px;
     font-weight: 600;
     border-radius: 5px;
     background-color: #cacaca96;
@@ -59,4 +58,10 @@ export const Entrar = styled.button`
         display: flex;
         align-items: center;
     }
+`
+
+export const UserContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    margin-right: 50px;
 `

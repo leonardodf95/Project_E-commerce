@@ -2,23 +2,39 @@ import { BsCart4 } from "react-icons/bs";
 import { BtnClean, CartArea, CartButton, TotalArea } from "./style";
 import { Empty, Popconfirm } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
-import { useState } from "react";
+import { useContext, useCallback, useMemo } from "react";
+import CartContext from "../../context/CartContext";
+import ProductsContext from "../../context/ProductsContext";
+import CartProduct from "./CartProduct";
 
 const ToogleCarrinho = () => {
-    const [cartOpen, setCartOpen] = useState(false)
+  const { cart, cartOpen, cleanCart, toogleCartOpen } = useContext(CartContext);
+  const {products} = useContext(ProductsContext)
 
-    const toogleCartOpen = () => (setCartOpen(!cartOpen))
-    
-    return (
+  const findProduct = useCallback(
+    (productId) => products.find((product) => product.id === productId),
+    [products]
+  );
+
+  const total = useMemo(
+    () => cart.reduce(
+      (total, cartProduct) => {
+        const foundProduct = findProduct(cartProduct.id)
+        const ammountPrice = foundProduct.price
+        return total + ammountPrice
+      },
+      0
+    ),
+    [cart, findProduct]
+  )
+
+  return (
     <>
-      <CartButton
-        open={cartOpen}
-        onClick={toogleCartOpen}
-      >
+      <CartButton open={cartOpen} onClick={toogleCartOpen} qty={cart.length}>
         <BsCart4 />
       </CartButton>
       <CartArea open={cartOpen}>
-        {/* {cart.length ? (
+        {cart.length ? (
           <>
             <h2>Produtos selecionados</h2>
             {cart.map((cartProduct, index) => (
@@ -47,11 +63,10 @@ const ToogleCarrinho = () => {
             }
             description="Carrinho vazio!"
           />
-        )} */}
+        )}
       </CartArea>
     </>
   );
 };
-
 
 export default ToogleCarrinho;

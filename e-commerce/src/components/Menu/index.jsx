@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { CgProfile, CgSmileNone } from "react-icons/cg";
-import { MenuBar, LogoImage, MenuItems, Items, Entrar } from "./style";
+import { CgProfile } from "react-icons/cg";
+import { MenuBar, LogoImage, MenuItems, Items, UserContainer, Button } from "./style";
 import routes from "../../defaults/routes";
 
 const Menu = () => {
@@ -17,7 +17,11 @@ const Menu = () => {
           </Items>
         ))}
       </MenuItems>
-      <Entrar><Link to='/login'><CgProfile/>Entrar</Link></Entrar>
+      <UserContainer>
+        <Button><Link to='/login'><CgProfile/>Entrar</Link></Button>
+          <Button><Link to='/cadastro'>Cadastre-se</Link></Button>
+      </UserContainer>
+      
     </MenuBar>
   );
 };
