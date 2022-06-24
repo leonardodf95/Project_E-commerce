@@ -31,6 +31,11 @@ function App() {
     []
   );
 
+  const findProduct = useCallback(
+    (productId) => products.find((product) => product.id === productId),
+    [products]
+  );
+
   const addProductToCart = useCallback(
     (product) => {
       const foundProductIndex = cart.findIndex((cartProduct) =>
@@ -72,14 +77,19 @@ function App() {
 
   const cleanCart = useCallback(() => setCart([]), []);
 
-  useEffect(() => {
+  useEffect(() => {( async () => {
     const storedCart = localStorage.getItem(CART_LS);
     if (!storedCart) return;
 
     const parsedStoredCart = JSON.parse(storedCart);
-
+    if (products.length === 0) {
+      const listProducts = await ProductAPI.getListProduct();
+      const storedProducts = listProducts.slice(2)
+      setProducts(storedProducts)
+      setCart(parsedStoredCart);
+    }
     setCart(parsedStoredCart);
-  }, []);
+  })()}, []);
 
   useEffect(() => {
     localStorage.setItem(CART_LS, JSON.stringify(cart));

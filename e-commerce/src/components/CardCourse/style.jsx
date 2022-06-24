@@ -15,8 +15,8 @@ export const CardArea = styled.div`
 
 export const Photo = styled.img`
     border-radius: 50%;
-    width: 150px;
-    height: 160px;
+    width: 140px;
+    height: 140px;
     margin: 15px 15px 0 15px;
     border: 1px solid white;
     padding: 3px;
