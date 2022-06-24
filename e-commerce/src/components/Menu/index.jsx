@@ -1,9 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
-import { MenuBar, LogoImage, MenuItems, Items, UserContainer, Button } from "./style";
+import { MenuBar, LogoImage, MenuItems, Items, UserContainer, Button, LoggedUser, LoggedUserContainer, LogoutButton } from "./style";
 import routes from "../../defaults/routes";
+import UserContext from "../../context/UserContext";
+import { useContext } from "react";
+
 
 const Menu = () => {
+  const navigate = useNavigate()
+  const {user, handleLogout, authenticated } = useContext(UserContext)
+
+  const onClickLogout = () => {
+    handleLogout()
+    navigate('/', {replace:true})
+    window.location.reload()
+  }
+
   return (
     <MenuBar>
       <LogoImage
@@ -17,10 +29,18 @@ const Menu = () => {
           </Items>
         ))}
       </MenuItems>
-      <UserContainer>
-        <Button><Link to='/login'><CgProfile/>Entrar</Link></Button>
+      {(!authenticated)? (
+        <UserContainer>
+          <Button><Link to='/login'><CgProfile/>Entrar</Link></Button>
           <Button><Link to='/cadastro'>Cadastre-se</Link></Button>
-      </UserContainer>
+        </UserContainer>
+      ):
+      (<LoggedUserContainer>
+        <LoggedUser>Bem vindo {user.user.name}!</LoggedUser>
+        <LogoutButton onClick={onClickLogout}>Sair</LogoutButton>
+      </LoggedUserContainer>)
+      } 
+      
       
     </MenuBar>
   );

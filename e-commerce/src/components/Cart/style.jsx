@@ -59,6 +59,7 @@ export const CartArea = styled.div`
   z-index: 1000;
   height: 100%;
   top: 0;
+  overflow: auto;
   transition: .5s right ease, .5s box-shadow ease;
 
   ${({ open }) => open && `
@@ -79,13 +80,27 @@ export const TotalArea = styled.div`
 `
 
 export const BtnClean = styled.button`
+    border: none;
+    background: #ff6d39;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 14px;
+    text-transform: uppercase;
+    outline: none;
+    padding: 5px;
+    width: 100%;
+`
+
+export const BtnFinishBuy = styled.button`
   border: none;
-  background: #ff6d39;
+  background: #5f4be1;
   border-radius: 5px;
   color: #fff;
   cursor: pointer;
   margin-top: 20px;
-  font-size: 16px;
+  font-size: 14px;
   text-transform: uppercase;
   outline: none;
   padding: 10px;

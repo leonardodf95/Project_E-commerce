@@ -1,21 +1,22 @@
 import { Form, Input, Button, Radio } from "antd"
-import { useEffect } from "react";
 import { useContext } from "react";
 import UserContext from "../../context/UserContext";
 import { Container, SubTitle, Title, TitleContainer } from "./style";
 import UserRegister from "../../API/UserAPI/UserRegister";
+import { useNavigate } from "react-router-dom";
+
 
 const Cadastro = () => {
     const [form] = Form.useForm()
-    const {registrationUser , setRegistration} = useContext(UserContext)
-
+    const { setRegistration} = useContext(UserContext)
+    const navigate = useNavigate()
     const onFinish = (e) => {
-        console.log(e)
+        // console.log(e)
         setRegistration(e)
         UserRegister.Register(e)
+        navigate('/cadastro/sucesso', {replace: true})
     }
 
-    useEffect(()=>{console.log('useEffect: ',registrationUser)},[registrationUser])
     return (
         <Container>
             <TitleContainer>
@@ -32,7 +33,7 @@ const Cadastro = () => {
                 <Form.Item name='birthday_date' label='Data de Nascimento:' rules={[{required: true, message:'Campo Data de nascimento é obrigatório.'}]}>
                     <Input type='date' placeholder="Data de Nascimento"/>
                 </Form.Item>
-                <Form.Item name='gender' label='Identidade de Gênero:' rules={[{required: true, message:'Campo obrigatório.'}]}>
+                <Form.Item name='gender_identity' label='Identidade de Gênero:' rules={[{required: true, message:'Campo obrigatório.'}]}>
                     <Radio.Group>
                         <Radio value='Cisgênero'>Cisgênero</Radio>
                         <Radio value='Transgênero'>Transgênero</Radio>
@@ -65,8 +66,14 @@ const Cadastro = () => {
                 <Form.Item name='email' label='E-mail:' rules={[{required: true, message:'Campo E-mail é obrigatório.'}]}>
                     <Input placeholder="E-mail" type='email'/>
                 </Form.Item> 
-                <Form.Item name='senha' label='Senha:' rules={[{required: true, message:'Campo Senha é obrigatório.'}]}>
+                <Form.Item name='password' label='Senha:' rules={[{required: true, message:'Campo Senha é obrigatório.'}]}>
                     <Input.Password placeholder='Senha'/>
+                </Form.Item>
+                <Form.Item name='role_id' rules={[{required: true, message: 'Campo obrigatório.'}]}>
+                    <Radio.Group>
+                        <Radio value='5be3f402-0c14-4ece-90a1-121bebae2a00'>Administrador</Radio>
+                        <Radio value='bb6742f2-7622-4444-b102-f8b992135023'>Estudante</Radio>
+                    </Radio.Group>
                 </Form.Item>
                 <Form.Item >
                     <Button type="primary" htmlType="submit">Cadastrar</Button>

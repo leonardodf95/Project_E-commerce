@@ -1,5 +1,5 @@
 import { BsCart4 } from "react-icons/bs";
-import { BtnClean, CartArea, CartButton, TotalArea } from "./style";
+import { BtnClean, BtnFinishBuy, CartArea, CartButton, TotalArea } from "./style";
 import { Empty, Popconfirm } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import { useContext, useCallback, useMemo } from "react";
@@ -55,6 +55,7 @@ const ToogleCarrinho = () => {
               <BtnClean>Limpar carrinho</BtnClean>
             </Popconfirm>
             <TotalArea>Total: ${total}</TotalArea>
+            <BtnFinishBuy>Finalizar compra!</BtnFinishBuy>
           </>
         ) : (
           <Empty

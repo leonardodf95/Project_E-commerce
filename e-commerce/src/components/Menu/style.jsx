@@ -44,6 +44,7 @@ export const Button = styled.button`
     border: none;
     color: #fff;
     margin-right: 5px;
+    font-size: 14px;
     font-weight: 600;
     border-radius: 5px;
     background-color: #cacaca96;
@@ -64,4 +65,24 @@ export const UserContainer = styled.div`
     display: flex;
     flex-direction: row;
     margin-right: 50px;
+`
+export const LoggedUserContainer = styled.div`
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-right: 10px;
+`
+
+export const LoggedUser = styled.p`
+    font-size: 16px;
+    font-weight: 600;
+    color: #310094;
+    margin: 0 50px 0 0;
+`
+
+export const LogoutButton = styled.button`
+    background-color: transparent;
+    border: none;
+    font-size: 13px;
+    cursor: pointer;
 `
