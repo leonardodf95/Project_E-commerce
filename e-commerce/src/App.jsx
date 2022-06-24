@@ -10,23 +10,19 @@ import routes from "./defaults/routes";
 import ToogleCarrinho from "./components/Cart";
 import Login from "./screens/Login";
 import Cadastro from "./screens/cadastro";
-import product from "../product.json";
 import CadastroConcluido from "./screens/cadastroConcluído";
 import { CART_LS, TOKEN_LS, USER_LS } from "./defaults/StorageKeys";
 import ProductAPI from "./API/ProductAPI/ProductAPI";
+import CompraConcluida from "./screens/compraConcluída";
 
 function App() {
   const [user, setUser] = useState();
   const [token, setToken] = useState();
-  const [authenticated, setAuthenticated] = useState()
+  const [authenticated, setAuthenticated] = useState();
   const [cart, setCart] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setProducts(product);
-  }, [product]);
 
   const toogleCartOpen = useCallback(() => setCartOpen(!cartOpen), [cartOpen]);
 
@@ -76,58 +72,49 @@ function App() {
 
   const cleanCart = useCallback(() => setCart([]), []);
 
-  useEffect(
-    () => {
-      const storedCart = localStorage.getItem(CART_LS)
-      if (!storedCart) return;
+  useEffect(() => {
+    const storedCart = localStorage.getItem(CART_LS);
+    if (!storedCart) return;
 
-      const parsedStoredCart = JSON.parse(storedCart)
+    const parsedStoredCart = JSON.parse(storedCart);
 
-      setCart(parsedStoredCart)
-    },
-    []
-  )
+    setCart(parsedStoredCart);
+  }, []);
 
-  useEffect(
-    () => {
-      localStorage.setItem(CART_LS, JSON.stringify(cart))
-    },
-    [cart]
-  )
+  useEffect(() => {
+    localStorage.setItem(CART_LS, JSON.stringify(cart));
+  }, [cart]);
 
-  useEffect(
-    () => {
-      const tokenStorage = localStorage.getItem(TOKEN_LS)
-      const userStorage = localStorage.getItem(USER_LS)
-      console.log('token', tokenStorage)
-      if(!tokenStorage || !userStorage) {
-        setToken(null)
-        setAuthenticated(false)
-        return
-      }
-      setToken(tokenStorage)
-      const parsedUser = JSON.parse(userStorage)
-      setUser(parsedUser)      
-      setAuthenticated(true)
-    }, []
-  )
+  useEffect(() => {
+    const tokenStorage = localStorage.getItem(TOKEN_LS);
+    const userStorage = localStorage.getItem(USER_LS);
+    console.log("token", tokenStorage);
+    if (!tokenStorage || !userStorage) {
+      setToken(null);
+      setAuthenticated(false);
+      return;
+    }
+    setToken(tokenStorage);
+    const parsedUser = JSON.parse(userStorage);
+    setUser(parsedUser);
+    setAuthenticated(true);
+  }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem(TOKEN_LS)
-    localStorage.removeItem(USER_LS)
-    localStorage.removeItem(CART_LS)
-    setAuthenticated(false)
-  }
+    localStorage.removeItem(TOKEN_LS);
+    localStorage.removeItem(USER_LS);
+    localStorage.removeItem(CART_LS);
+    setAuthenticated(false);
+  };
 
-  useEffect(
-    () => {
-      (async () => {
-        const storedProducts = await ProductAPI.getListProduct()
-        console.log('productList', storedProducts)
-      })()
-    },
-    []
-  )
+  useEffect(() => {
+    (async () => {
+      const listProducts = await ProductAPI.getListProduct();
+      const storedProducts = listProducts.slice(2)
+      setProducts(storedProducts)
+      console.log("productList", storedProducts);
+    })();
+  }, []);
 
   return (
     <BrowserRouter>
@@ -136,25 +123,25 @@ function App() {
           products,
         }}
       >
-        <CartContext.Provider
+        <UserContext.Provider
           value={{
-            addProductToCart,
-            cart,
-            cartOpen,
-            cleanCart,
-            removeProductFromCart,
-            toogleCartOpen,
+            user,
+            setUser,
+            setToken,
+            token,
+            handleLogout,
+            authenticated,
+            setAuthenticated,
           }}
         >
-          <UserContext.Provider
+          <CartContext.Provider
             value={{
-              user,
-              setUser,
-              setToken,
-              token,
-              handleLogout,
-              authenticated,
-              setAuthenticated
+              addProductToCart,
+              cart,
+              cartOpen,
+              cleanCart,
+              removeProductFromCart,
+              toogleCartOpen,
             }}
           >
             <Menu />
@@ -180,10 +167,15 @@ function App() {
                   path="/cadastro/sucesso"
                   element={<CadastroConcluido />}
                 />
+                <Route
+                  key="compraConcluida"
+                  path="/compraConcluida"
+                  element={<CompraConcluida />}
+                />
               </Routes>
             </LoadingContext.Provider>
-          </UserContext.Provider>
-        </CartContext.Provider>
+          </CartContext.Provider>
+        </UserContext.Provider>
       </ProductsContext.Provider>
     </BrowserRouter>
   );

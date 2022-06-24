@@ -8,11 +8,11 @@ import { useNavigate } from "react-router-dom";
 
 const Cadastro = () => {
     const [form] = Form.useForm()
-    const { setRegistration} = useContext(UserContext)
+    // const { setRegistration} = useContext(UserContext)
     const navigate = useNavigate()
     const onFinish = (e) => {
         // console.log(e)
-        setRegistration(e)
+        // setRegistration(e)
         UserRegister.Register(e)
         navigate('/cadastro/sucesso', {replace: true})
     }

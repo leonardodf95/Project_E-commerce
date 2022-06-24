@@ -12,12 +12,12 @@ const routes = [
         key: 'inicio',
         label: 'Início'   
     },
-    {
-        path: ROUTES_SOBRE,
-        element:<Sobre />,
-        key: 'sobre',
-        label: 'Sobre'
-    }
+    // {
+    //     path: ROUTES_SOBRE,
+    //     element:<Sobre />,
+    //     key: 'sobre',
+    //     label: 'Sobre'
+    // }
 ]
 
 export default routes

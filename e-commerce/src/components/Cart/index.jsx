@@ -6,10 +6,25 @@ import { useContext, useCallback, useMemo } from "react";
 import CartContext from "../../context/CartContext";
 import ProductsContext from "../../context/ProductsContext";
 import CartProduct from "./CartProduct";
+import UserContext from "../../context/UserContext";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const ToogleCarrinho = () => {
   const { cart, cartOpen, cleanCart, toogleCartOpen } = useContext(CartContext);
   const {products} = useContext(ProductsContext)
+  const { authenticated } = useContext(UserContext)
+  const navigate = useNavigate()
+  const [hidden, setHidden] = useState(false)
+
+  const finalisePurchase = () => {
+    if(authenticated){
+      navigate('/compraConcluida', {replace:true})
+      setHidden(true)
+    } else{
+      navigate('/login', {replace:true})
+    }
+  }
 
   const findProduct = useCallback(
     (productId) => products.find((product) => product.id === productId),
@@ -30,13 +45,13 @@ const ToogleCarrinho = () => {
 
   return (
     <>
-      <CartButton open={cartOpen} onClick={toogleCartOpen} qty={cart.length}>
+      <CartButton open={cartOpen} onClick={toogleCartOpen} qty={cart.length} hidden={hidden}>
         <BsCart4 />
       </CartButton>
-      <CartArea open={cartOpen}>
+      <CartArea open={cartOpen} hidden={hidden}>
         {cart.length ? (
           <>
-            <h2>Produtos selecionados</h2>
+            <h2>Produtos selecionados:</h2>
             {cart.map((cartProduct, index) => (
               <CartProduct
                 key={`${cartProduct.id}_${index}`}
@@ -55,7 +70,7 @@ const ToogleCarrinho = () => {
               <BtnClean>Limpar carrinho</BtnClean>
             </Popconfirm>
             <TotalArea>Total: ${total}</TotalArea>
-            <BtnFinishBuy>Finalizar compra!</BtnFinishBuy>
+            <BtnFinishBuy onClick={finalisePurchase}>Finalizar compra!</BtnFinishBuy>
           </>
         ) : (
           <Empty
